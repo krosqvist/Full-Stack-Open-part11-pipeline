@@ -77,12 +77,12 @@ export default defineConfig({
       command: 'npm run start:test',
       cwd: '../bloglist-backend',
       url: 'http://localhost:3001/api/blogs',
-      reuseExistingServer: false,
+      reuseExistingServer: !process.env.CI,
       env: {
         NODE_ENV: 'test',
         PORT: '3001',
-        MONGODB_URI: 'mongodb://127.0.0.1:27017/testBlogApp'
-      }
+        MONGODB_URI: process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/bloglist_test',
+      },
     },
     {
       command: 'npm run dev -- --host 127.0.0.1',
