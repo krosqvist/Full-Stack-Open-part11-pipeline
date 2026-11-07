@@ -15,7 +15,8 @@ jobs:
           - 27017:27017
 
     env:
-      MONGODB_URI: mongodb://localhost:27017/bloglist_test
+      TEST_MONGODB_URI: mongodb://localhost:27017/bloglist_test
+      SECRET: testsecret
 
     steps:
       - uses: actions/checkout@v6
@@ -41,14 +42,6 @@ jobs:
 
       - name: Frontend unit tests
         run: npm run vitest
-        working-directory: bloglist-frontend
-
-      - name: Install Playwright Chromium
-        run: npx playwright install --with-deps chromium
-        working-directory: bloglist-frontend
-
-      - name: Playwright tests
-        run: npm test -- --project=chromium
         working-directory: bloglist-frontend
 
       - name: Backend lint

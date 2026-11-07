@@ -81,7 +81,7 @@ export default defineConfig({
       env: {
         NODE_ENV: 'test',
         PORT: '3001',
-        MONGODB_URI: process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/bloglist_test',
+        TEST_MONGODB_URI: process.env.TEST_MONGODB_URI || 'mongodb://127.0.0.1:27017/bloglist_test',
       },
     },
     {
