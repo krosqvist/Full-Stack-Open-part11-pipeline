@@ -1,0 +1,33 @@
+{
+  "name": "blogilista",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=develpoment node --watch index.js",
+    "test": "NODE_ENV=test node --test",
+    "lint": "eslint .",
+    "start:test": "NODE_ENV=test node --watch index.js",
+    "build:ui": "rm -rf dist && cd ~/Full-Stack-Open-part11-pipeline/bloglist-backend && npm run build && cp -r dist ~/Full-Stack-Open-part11-pipeline/bloglist-backend",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^8.13.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.24.0",
+    "@stylistic/eslint-plugin-js": "^4.2.0",
+    "eslint": "^9.24.0",
+    "globals": "^16.0.0",
+    "supertest": "^7.1.0"
+  }
+}

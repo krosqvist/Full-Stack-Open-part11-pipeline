@@ -1,0 +1,60 @@
+name: Deployment pipeline
+on:
+  push:
+    branches: [ main, master]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+
+    env:
+      MONGODB_URI: mongodb://localhost:27017/bloglist_test
+
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install frontend dependencies
+        run: npm install
+        working-directory: bloglist-frontend
+
+      - name: Install backend dependencies
+        run: npm install
+        working-directory: bloglist-backend
+
+      - name: Frontend lint
+        run: npm run lint
+        working-directory: bloglist-frontend
+
+      - name: Frontend build
+        run: npm run build
+        working-directory: bloglist-frontend
+
+      - name: Frontend unit tests
+        run: npm run vitest
+        working-directory: bloglist-frontend
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+        working-directory: bloglist-frontend
+
+      - name: Playwright tests
+        run: npm test -- --project=chromium
+        working-directory: bloglist-frontend
+
+      - name: Backend lint
+        run: npm run lint
+        working-directory: bloglist-backend
+
+      - name: Backend tests
+        run: npm test
+        working-directory: bloglist-backend
