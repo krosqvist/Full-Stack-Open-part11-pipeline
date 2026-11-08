@@ -1,9 +1,12 @@
 name: Deployment pipeline
+
 on:
   push:
-    branches: [ main, master]
+    branches:
+      - main
   pull_request:
-    branches: [ main, master ]
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
   build_and_test:
@@ -40,7 +43,7 @@ jobs:
         run: npm run build
         working-directory: bloglist-frontend
 
-      - name: Frontend unit tests
+      - name: Frontend tests
         run: npm run vitest
         working-directory: bloglist-frontend
 
