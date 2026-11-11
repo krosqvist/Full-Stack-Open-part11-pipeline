@@ -104,7 +104,7 @@ jobs:
           status: Failure
           title: "Build or deployment failed"
           description: |
-            Something went wrong in the deployment pipeline.
+            Something went wrong in the deployment pipeline
             Repository: ${{ github.repository }}
             Branch: ${{ github.ref_name }}
             Commit: ${{ github.sha }}
